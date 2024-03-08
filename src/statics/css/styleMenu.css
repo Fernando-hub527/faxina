@@ -1,0 +1,125 @@
+.menu{
+	width:6%; 
+    height: 100%;
+    top: 0%;
+    text-align: center;
+    transition: all 0.5s ease;
+    background-color: #202020;
+	overflow:hidden;
+	position:fixed;
+    min-height: 500px;
+    z-index: 2;
+
+}
+.menu-on{
+    width:22%; 
+}
+
+
+
+.menu .menu_hamburguer{
+    cursor: pointer;
+    position: absolute;
+    margin-left: 30%;
+    margin-top: 30%;
+    transition: all 0.5s ease;
+    width: 35%;
+    height: 5%;
+}
+
+.menu .menu_hamburguer span{
+    position: absolute;
+    margin-top: 0%;
+    margin-left: -50%;
+    height: 3px;
+    width: 120%;
+    border-radius: 30px;
+    background: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.menu_hamburguer span:nth-child(1){
+  top: 0;
+}
+
+.menu_hamburguer span:nth-child(2){
+  top: 13px;
+}
+
+.menu_hamburguer span:nth-child(3){
+  top: 26px;
+}
+
+
+.menu .menu_hamburger-on{
+    margin-top: 1%;
+    margin-left: 85%;
+    width: 10%;
+}
+
+.menu_hamburger-on span:nth-child(1){
+    transform: rotate(-45deg);
+    margin-top: 25px;
+}
+  
+.menu_hamburger-on span:nth-child(2){
+    opacity: 0;
+}
+  
+.menu_hamburger-on  span:nth-child(3){
+    transform: rotate(45deg);
+    margin-top: -0px;
+}
+
+@media(max-width: 540px){
+    .menu{
+        width: 15%;
+    }
+
+    .menu-on{
+        width: 70%;
+    }
+
+    .menu .menu_hamburger-on{
+        margin-left: 70%;
+        margin-top: -18%;
+    }
+}
+
+
+@media(max-width: 375px){
+    .menu{
+        min-height: 350px;
+    }
+
+    .menu-on .menu_hamburguer{
+        margin-top: -25%;
+    }
+
+    .menu_hamburguer span:nth-child(1){
+        top: 0;
+    }
+      
+    .menu_hamburguer span:nth-child(2){
+        top: 8px;
+    }
+      
+    .menu_hamburguer span:nth-child(3){
+        top: 16px;
+    }
+      
+    .menu_hamburger-on span:nth-child(1){
+        transform: rotate(-45deg);
+        margin-top: 25px;
+    }
+      
+    .menu_hamburger-on span:nth-child(2){
+        opacity: 0;
+    }
+      
+    .menu_hamburger-on  span:nth-child(3){
+        transform: rotate(45deg);
+        margin-top: 8px;
+    }
+    
+}
