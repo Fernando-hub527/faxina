@@ -1,0 +1,53 @@
+.client_modal_background{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.082);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 4;
+    left: px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+
+.client_modal{
+    background-color: rgb(255, 255, 255);
+    left: px;
+    right: 0px;
+    z-index: 5;
+    width: 50%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.client_modal header{
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.client_modal header img{
+    width: 5%;
+    height: 31%;
+    cursor: pointer;
+    margin-right: 1.5%;
+    margin-top: 1.5%;
+}
+
+.client_modal div{
+    margin-top: 5%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    row-gap: 20px;
+}
+
+.client_modal div p{
+    margin: 0%;
+    padding: 0%;
+}

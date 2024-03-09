@@ -5,45 +5,56 @@ import addIcon from "../../statics/imgs/addIcon.png"
 
 import "../../statics/css/styleHomePage.css"
 import { FilterModal } from "../../components/specializedComponents/home/FilterModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { selectText } from "../../services/alert/defaultAlerts";
+import { ClientModal } from "../../components/specializedComponents/home/ClientModal";
 
 export function HomePage(props){
     const [modalFilter, setModalFilter] = useState(false)
+    const [informationClient, setInformationClient] = useState(false)
+    const [clients, setClients] = useState([])
+
+
+    const loadClients = () => {
+        setClients([
+            {name: "Fernando Coelho Saraiva", address: "Bahia-Boa vista-Rua diocleciano - 73", telephone: 77998574669, email: "fernando@gmail.com", day: 5},
+            {name: "Fernando Coelho Saraiva", address: "Bahia-Boa vista-Rua diocleciano - 73", telephone: 77998574669, email: "fernando@gmail.com", day: 5},
+            {name: "Fernando Coelho Saraiva", address: "Bahia-Boa vista-Rua diocleciano - 73", telephone: 77998574669, email: "fernando@gmail.com", day: 5}
+        ])
+    }
+    useEffect(()=>{
+        loadClients()
+    })
 
     const addClient = async () => {
         const newUser = await createNewUserForm()
         if(!newUser) return
-
     }
+
+    const clientComponents = clients.map((client) => {
+        return <ClientCard name={client.name} bairro={client.address} onClick ={() => setInformationClient(client)}></ClientCard>
+    })
 
     return (
         <div>
             <Menu />
             <div className="home_page">
+                {informationClient && <ClientModal client = {informationClient} setModal = {setInformationClient}/>}
+                {modalFilter && <div className="header_filter_modal"><FilterModal setModal = {setModalFilter}/></div>}
+
                 <header className="home_page_header">
                     <img onClick={addClient} src={addIcon} alt="Um circulo verde com um sinal de mais no meio"/>
                     <img onClick={()=>setModalFilter(true)} src={filterIcon} alt=""/>
-
-                    {modalFilter && <div className="header_filter_modal"><FilterModal setModal = {setModalFilter}/></div>}
-                    
                 </header>
+
                 <section className="home_page_cardswrapper ">
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
-                    <ClientCard />
+                    {clientComponents}
                 </section>
             </div>
         </div>
     )
 }
+
 
 async function createNewUserForm(){
     const name = await selectText("Cadastro de cliente", "Nome", "text", "Qual o nome do cliente ?")    
