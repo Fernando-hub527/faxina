@@ -11,17 +11,25 @@
     margin-top: 2%;
     margin-right: 2%;
     width: 5%;
-    align-self: flex-end;
     display: flex;
+    align-self: flex-end;
     justify-content: space-between;
 }
 
-.home_page .home_page_header img{
+.home_page .home_page_header .header_filter_modal{
+
+
+    background-color: aqua;
+}
+
+
+
+.home_page .home_page_header > img{
     width: 35%;
     cursor: pointer;
 }
 
-.home_page .home_page_header img:active{
+.home_page .home_page_header > img:active{
     width: 33%;
 }
 
