@@ -1,4 +1,4 @@
-import { IError } from "./error/IError"
+import { IError } from "../error/IError"
 
 export class ResultsWrapper<T>{
     isSucess: boolean

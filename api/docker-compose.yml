@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: "test"
-      POSTGRES_PASSWORD: "test"
-      POSTGRES_DB: "test"
+      POSTGRES_USER: "faxina"
+      POSTGRES_PASSWORD: "faxina123"
+      POSTGRES_DB: "faxina"
 

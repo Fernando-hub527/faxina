@@ -6,10 +6,9 @@
   "scripts": {
     "test": "jest",
     "dev": "NODE_ENV=development tsnd --respawn ./server/server.ts",
-    "typeorm": "tsnd node_modules/.bin/typeorm",
-    "typeormm": "typeorm-ts-node-commonjs",
     "build": "babel ./server --out-dir build --copy-files --no-copy-ignored",
-    "start": "NODE_ENV=development tsnd --respawn ./build/server.ts"
+    "start": "NODE_ENV=development tsnd --respawn ./build/server.ts",
+    "start_database": "tsnd --respawn ./server/script/start_database.ts"
   },
   "author": "",
   "license": "ISC",

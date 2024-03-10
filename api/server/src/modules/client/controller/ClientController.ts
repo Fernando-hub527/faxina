@@ -7,18 +7,19 @@ import { IClientService } from "../service/IClientService";
 import { ClientDTO } from "../dtos/ClientDTO";
 import { ErrorInvalidParams } from "../../../error/ErrorInvalidParams";
 import { ClienQueryParametersDTO } from "../dtos/QueryParametersDTO";
+import { UserService } from "../../user/service/UserService";
 
 export class ClientController implements IClientController{
     userService: IUserService
     clientService: IClientService
 
     constructor(userService?: IUserService, clientService ?: IClientService){
-        this.userService = userService
+        this.userService = userService || new UserService()
         this.clientService = clientService
     }
     
     async createClient(req: Request, res: Response) {
-        const userOrError = await this.userService.findUserById(Number(req.params.id))
+        const userOrError = await this.userService.findUserById(Number(1))
         if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin) return res.status(userOrError.getError().statusCode).send(new ErrorAccessDenied())
         
         const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)

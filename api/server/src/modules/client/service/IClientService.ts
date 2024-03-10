@@ -1,4 +1,4 @@
-import { ResultsWrapper } from "../../../ResultsWrapper"
+import { ResultsWrapper } from "../../../utils/ResultsWrapper"
 import { ClientDTO } from "../dtos/ClientDTO"
 import { ClienQueryParametersDTO } from "../dtos/QueryParametersDTO"
 

@@ -1,4 +1,4 @@
-import { ResultsWrapper } from "../../../ResultsWrapper"
+import { ResultsWrapper } from "../../../utils/ResultsWrapper"
 import { ErrorInvalidParams } from "../../../error/ErrorInvalidParams"
 
 export class ClientDTO {
