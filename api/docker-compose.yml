@@ -9,4 +9,7 @@ services:
       POSTGRES_USER: "faxina"
       POSTGRES_PASSWORD: "faxina123"
       POSTGRES_DB: "faxina"
-
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
