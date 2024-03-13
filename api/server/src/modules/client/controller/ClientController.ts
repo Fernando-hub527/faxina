@@ -19,16 +19,17 @@ export class ClientController implements IClientController{
     }
     
     async createClient(req: Request, res: Response) {
-        const userOrError = await this.userService.findUserById(Number(1))
+        const userOrError = await this.userService.findUserById(Number(req.user.id))
         if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin) return res.status(userOrError.getError().statusCode).send(new ErrorAccessDenied())
         
-        const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
-        if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getValue())
+        // const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
+        // if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getValue())
 
-        const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
-        if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
+        // const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
+        // if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
 
-        return res.status(200).send(clientCreatedOrError)
+        // return res.status(200).send(clientCreatedOrError)
+        return res.status(200).send({})
     }
 
     async listClients(req: Request, res: Response) {
