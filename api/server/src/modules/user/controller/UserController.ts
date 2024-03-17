@@ -6,6 +6,7 @@ import { IUserService } from "../service/IUserService";
 import { UserService } from "../service/UserService";
 import { STATUS_CODES } from "http";
 import { ErrorAccessDenied } from "../../../error/ErrorAcessoNegado";
+import { SessionUserDTO } from "../dto/SessionUserDTO";
 
 export class UserController implements IUserController{
     userService: IUserService
@@ -21,9 +22,10 @@ export class UserController implements IUserController{
         }
 
         const accessOrError = await this.userService.validLogin(req.body.userName, req.body.password)
-        if(!accessOrError.isSucess) return res.status(accessOrError.getError().statusCode).send(accessOrError)
+        if(!accessOrError.isSucess) return res.status(accessOrError.getError().statusCode).send(accessOrError.getError())
 
-        
+        req.session['user'] = new SessionUserDTO(accessOrError.getValue().userName, accessOrError.getValue().id, accessOrError.getValue().profile)
+        res.status(200).send({sessionId: req.session.id})
     }
     
 }

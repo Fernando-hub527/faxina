@@ -14,9 +14,10 @@ export class UserService implements IUserService{
     }
     async validLogin(userName: string, password: string): Promise<ResultsWrapper<UserDTO>> {
         const userOrError = await this.repository.findUserByUserName(userName)
-        if(!userOrError) return ResultsWrapper.fail(new ErrorAccessDenied())
-
-        return argon2d.verify("<big long hash>", password) ? ResultsWrapper.ok(userOrError.getValue()) : ResultsWrapper.fail(new ErrorAccessDenied())
+        if(!userOrError.isSucess) return ResultsWrapper.fail(new ErrorAccessDenied())
+        
+        const access = await argon2d.verify(userOrError.getValue().password, password)
+        return access ? ResultsWrapper.ok(userOrError.getValue()) : ResultsWrapper.fail(new ErrorAccessDenied())
     }
 
     findUserById(id: number): Promise<ResultsWrapper<UserDTO>> {
