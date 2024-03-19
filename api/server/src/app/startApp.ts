@@ -36,7 +36,7 @@ export class StartApp{
     }
   
     private async setMiddleares (store: RedisStore) {
-      this.app.use(session({store: store, resave: false, saveUninitialized: false, secret: "keyboard cat"}))
+      this.app.use(session({resave: false, saveUninitialized: false, secret: "keyboard cat"}))
 
       this.app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', '*')

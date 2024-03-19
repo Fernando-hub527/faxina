@@ -10,9 +10,6 @@ export class UserRepository implements IUserRepository{
     async findUserByUserName(userName: string): Promise<ResultsWrapper<UserDTO>> {
         const result = await pool.query(`select * from user_admin where user_name='${userName}';`)
         if(!result.rows[0]) return ResultsWrapper.fail(new ErrorRegisterNotFound(userName, "user"))
-
-        console.log(result.rows[0].user_name)
-
         return ResultsWrapper.ok(new UserDTO(result.rows[0].user_name, result.rows[0].password, result.rows[0].id, result.rows[0].profile))
     }
     
