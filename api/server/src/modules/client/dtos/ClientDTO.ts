@@ -16,7 +16,7 @@ export class ClientDTO {
     }
 
     static factoryNewClient(name ?: String, email ?: string, telephone ?: number, address ?: string, cleaningDay ?: number ): ResultsWrapper<ClientDTO>{
-        if(name || email || telephone || address || cleaningDay ) return ResultsWrapper.fail(new ErrorInvalidParams("Não foi possível processar dados do cliente, valores inválidos"))
+        if(!name || !email || !telephone || !address || !cleaningDay ) return ResultsWrapper.fail(new ErrorInvalidParams("Não foi possível processar dados do cliente, valores inválidos"))
         if(name.length > 40 || name.length < 10) return ResultsWrapper.fail(new ErrorInvalidParams(`Nome deve ter entre 10 e 40 caracteres`))
         if(!(new RegExp("/\S+@\S+\.\S+/").test(email))) return ResultsWrapper.fail(new ErrorInvalidParams(`Email inválido`))
         if(telephone.toString().length < 9) return ResultsWrapper.fail(new ErrorInvalidParams(`Telefone com tamanho inválido`))

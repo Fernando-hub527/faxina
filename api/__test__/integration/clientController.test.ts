@@ -11,12 +11,8 @@ const app = new StartApp().startTeste()
 describe("Creating client", () => {
     beforeEach(async () =>  {
         await pool.query(`delete from user_admin;`)
-
-        // await pool.query(`delete from user_admin; insert into user_admin (user_name, password, profile) values('Fernando', '${await argon2d.hash("senha1230", {type: argon2d.argon2id})}', 1)`)
-        // authenticatedSession = requestSession(await app)
-        // unauthenticatedSession = requestSession(await app)
-        // expect((await authenticatedSession.post("/api/faxina/v1/login").send({userName: "Fernando", password: "senha1230"})).statusCode).toEqual(200)
     });
+
     it("If user is not logged in, then access denied with 401 is returned", async () => {
         const session = await createSession()
         const response = await session.post("/api/faxina/v1/client")
@@ -27,6 +23,12 @@ describe("Creating client", () => {
         const session = await createSession("Fernando", "senha1230", 2)   
         const response = await session.post("/api/faxina/v1/client")
         expect(response.statusCode).toEqual(403)
+    })
+
+    it("If invalid parameters are sent, then access denied with 400 is returned", async () => {  
+        const session = await createSession("Fernando", "senha1230", 1)   
+        const response = await session.post("/api/faxina/v1/client")
+        expect(response.statusCode).toEqual(400)
     })
 })
 

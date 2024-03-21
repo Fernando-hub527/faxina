@@ -20,10 +20,13 @@ export class ClientController implements IClientController{
     
     async createClient(req: Request, res: Response) {
         const userOrError = await this.userService.findUserById(Number(req.session.user.id))
-        if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin) return res.status(userOrError.getError().statusCode).send(new ErrorAccessDenied())
+        if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin){
+            const erro = new ErrorAccessDenied()
+            return res.status(erro.statusCode).send(erro)
+        }
         
-        // const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
-        // if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getValue())
+        const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
+        if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getError())
 
         // const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
         // if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
