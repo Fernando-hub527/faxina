@@ -24,6 +24,7 @@ export class UserController implements IUserController{
         const accessOrError = await this.userService.validLogin(req.body.userName, req.body.password)
         if(!accessOrError.isSucess) return res.status(accessOrError.getError().statusCode).send(accessOrError.getError())
 
+    
         req.session['user'] = new SessionUserDTO(accessOrError.getValue().userName, accessOrError.getValue().id, accessOrError.getValue().profile)
         res.status(200).send({sessionId: req.session.id})
     }

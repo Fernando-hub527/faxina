@@ -4,6 +4,7 @@ import { ErrorAccessDenied } from "../../../error/ErrorAcessoNegado";
 import { UserDTO } from "../dto/UserDTO";
 import { IUserRepository } from "./IUserRepository";
 import { ErrorRegisterNotFound } from "../../../error/ErrorRegisterNotFound";
+import { json } from "node:stream/consumers";
 
 export class UserRepository implements IUserRepository{
 
@@ -15,9 +16,9 @@ export class UserRepository implements IUserRepository{
     
 
     async findUserById(id: number): Promise<ResultsWrapper<UserDTO>> {
-        const result = await pool.query(`select * from user_admin;`)
-        console.log(result.rows[0])
-        return ResultsWrapper.fail(new ErrorAccessDenied())
+        const result = await pool.query(`select * from user_admin where id = ${id};`)
+        if(!result.rows[0]) return ResultsWrapper.fail(new ErrorRegisterNotFound(id.toString(), "user"))        
+        return ResultsWrapper.ok<UserDTO>(result.rows[0])
     }
 
 }

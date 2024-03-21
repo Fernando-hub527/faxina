@@ -19,8 +19,8 @@ export class ClientController implements IClientController{
     }
     
     async createClient(req: Request, res: Response) {
-        // const userOrError = await this.userService.findUserById(Number(req.session.user.id))
-        // if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin) return res.status(userOrError.getError().statusCode).send(new ErrorAccessDenied())
+        const userOrError = await this.userService.findUserById(Number(req.session.user.id))
+        if(!userOrError.isSucess || userOrError.getValue().profile != Profile.admin) return res.status(userOrError.getError().statusCode).send(new ErrorAccessDenied())
         
         // const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
         // if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getValue())

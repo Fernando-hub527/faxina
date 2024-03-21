@@ -44,7 +44,7 @@ describe("Login", () => {
         const response = await request(await app)
                         .post("/api/faxina/v1/login")
                         .send({userName: "Fernando", password: "senha1230"})
-        
+                        
         expect(response.statusCode).toStrictEqual(200)
         expect(response.body).toHaveProperty('sessionId')
     })
