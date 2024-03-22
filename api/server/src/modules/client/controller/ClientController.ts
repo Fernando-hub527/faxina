@@ -28,8 +28,8 @@ export class ClientController implements IClientController{
         const newClientOrError = ClientDTO.factoryNewClient(req.body.name, req.body.email, req.body.telephone, req.body.address, req.body.cleaningDay)
         if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getError())
 
-        // const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
-        // if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
+        const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
+        if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
 
         // return res.status(200).send(clientCreatedOrError)
         return res.status(200).send({})

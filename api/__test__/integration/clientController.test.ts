@@ -1,16 +1,16 @@
-import request from "supertest"
 import requestSession from "supertest-session"
 
 import { StartApp } from "../../server/src/app/startApp"
 import { pool } from "../../server/infra/database/data-source"
 import argon2d from "argon2"
 import { Profile } from "../../server/src/modules/user/dto/UserDTO"
+import { ClientDTO } from "../../server/src/modules/client/dtos/ClientDTO"
 
 const app = new StartApp().startTeste()
 
 describe("Creating client", () => {
     beforeEach(async () =>  {
-        await pool.query(`delete from user_admin;`)
+        await pool.query(`delete from user_admin; delete from client;`)
     });
 
     it("If user is not logged in, then access denied with 401 is returned", async () => {
@@ -25,10 +25,29 @@ describe("Creating client", () => {
         expect(response.statusCode).toEqual(403)
     })
 
-    it("If invalid parameters are sent, then access denied with 400 is returned", async () => {  
+    it("If invalid parameters are sent, then  400 is returned", async () => {  
         const session = await createSession("Fernando", "senha1230", 1)   
         const response = await session.post("/api/faxina/v1/client")
         expect(response.statusCode).toEqual(400)
+    })
+
+    it("If user is already registered, then 400 is returned", async () => {  
+        const session = await createSession("Fernando", "senha1230", 1) 
+        await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('Fernando_coelho', 'fernando@gmail.com', 7774669, 'rua silva n. c', 10);`)
+        
+        const response = await session.post("/api/faxina/v1/client")
+            .send(ClientDTO.factoryNewClient("Fernando_coelho", "fernando@gmail.com", 7788574669, "rua x número y", 10).getValue())
+            
+        expect(response.statusCode).toEqual(400)
+    })
+
+    it("If request is valid, then 200 is returned", async () => {  
+        const session = await createSession("Fernando", "senha1230", 1)  
+
+        const response = await session.post("/api/faxina/v1/client")
+            .send(ClientDTO.factoryNewClient("Fernando_coelho", "fernando@gmail.com", 7788574669, "rua x número y", 10).getValue())
+            
+        expect(response.statusCode).toEqual(200)
     })
 })
 

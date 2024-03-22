@@ -1,0 +1,33 @@
+import { pool } from "../../../../infra/database/data-source";
+import { ErrorBadRequest } from "../../../error/ErrorBadRequest";
+import { ResultsWrapper } from "../../../utils/ResultsWrapper";
+import { ClientDTO } from "../dtos/ClientDTO";
+import { ClienQueryParametersDTO } from "../dtos/QueryParametersDTO";
+import { ICLientRepository } from "./IClientRepository";
+
+export class ClientRepository implements ICLientRepository{
+    
+    async createClient(client: ClientDTO): Promise<ResultsWrapper<ClientDTO>> {
+        const clientCreated = await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('${client.name}', '${client.email}', ${client.telephone}, '${client.address}', ${client.cleaningDay});`)
+        if(!clientCreated.rows[0]) return ResultsWrapper.fail(new ErrorBadRequest("Unable to create user"))
+        return ResultsWrapper.ok(client)
+    }
+
+    private makeSelectClient(queryParameters: ClienQueryParametersDTO){
+        
+        return `select * from client where ${queryParameters.name && "name="}`
+    }
+
+    async listClients(queryParameters: ClienQueryParametersDTO): Promise<ResultsWrapper<ClientDTO[]>> {
+        var base = 
+
+
+        const clientCreated = await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('${client.name}', '${client.email}', ${client.telephone}, '${client.address}', ${client.cleaningDay});`)
+        if(!clientCreated.rows[0]) return ResultsWrapper.fail(new ErrorBadRequest("Unable to create user"))
+        return ResultsWrapper.ok(client)
+    }
+    findClientById(clientId: number): Promise<ResultsWrapper<ClientDTO>> {
+        throw new Error("Method not implemented.");
+    }
+    
+}
