@@ -6,4 +6,6 @@ export interface ICLientRepository{
     createClient(client: ClientDTO): Promise<ResultsWrapper<ClientDTO>>
     listClients(queryParameters: ClienQueryParametersDTO): Promise<ResultsWrapper<ClientDTO[]>>
     findClientById(clientId: number): Promise<ResultsWrapper<ClientDTO>>
+    findClientByemail(email: string): Promise<ResultsWrapper<ClientDTO>>
+
 }

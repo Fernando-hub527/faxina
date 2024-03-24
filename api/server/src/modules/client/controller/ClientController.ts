@@ -8,6 +8,7 @@ import { ClientDTO } from "../dtos/ClientDTO";
 import { ErrorInvalidParams } from "../../../error/ErrorInvalidParams";
 import { ClienQueryParametersDTO } from "../dtos/QueryParametersDTO";
 import { UserService } from "../../user/service/UserService";
+import { CLientService } from "../service/ClientService";
 
 export class ClientController implements IClientController{
     userService: IUserService
@@ -15,7 +16,7 @@ export class ClientController implements IClientController{
 
     constructor(userService?: IUserService, clientService ?: IClientService){
         this.userService = userService || new UserService()
-        this.clientService = clientService
+        this.clientService = clientService || new CLientService()
     }
     
     async createClient(req: Request, res: Response) {
@@ -29,7 +30,7 @@ export class ClientController implements IClientController{
         if(!newClientOrError.isSucess) return res.status(newClientOrError.getError().statusCode).send(newClientOrError.getError())
 
         const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
-        if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getValue())
+        if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getError())
 
         // return res.status(200).send(clientCreatedOrError)
         return res.status(200).send({})
