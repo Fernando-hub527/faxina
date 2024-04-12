@@ -21,7 +21,7 @@ function setUpClientTable(resetDatabase: boolean){
         id SERIAL PRIMARY KEY,
         name varchar(100) NOT NULL,
         email varchar(200) NOT NULL,
-        telephone integer NOT NULL,
+        telephone bigint NOT NULL,
         address varchar(60) NOT NULL,
         cleaning_day integer NOT NULL
     );`

@@ -32,8 +32,7 @@ export class ClientController implements IClientController{
         const clientCreatedOrError = await this.clientService.createClient(newClientOrError.getValue())
         if(!clientCreatedOrError.isSucess) return res.status(clientCreatedOrError.getError().statusCode).send(clientCreatedOrError.getError())
 
-        // return res.status(200).send(clientCreatedOrError)
-        return res.status(200).send({})
+        return res.status(200).send(clientCreatedOrError)
     }
 
     async listClients(req: Request, res: Response) {

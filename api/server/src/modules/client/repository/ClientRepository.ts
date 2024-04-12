@@ -1,6 +1,7 @@
 import { pool } from "../../../../infra/database/data-source";
 import { ErrorBadRequest } from "../../../error/ErrorBadRequest";
 import { ErrorRegisterNotFound } from "../../../error/ErrorRegisterNotFound";
+import { ErrorUnknown } from "../../../error/ErrorUnableToPersistData";
 import { ResultsWrapper } from "../../../utils/ResultsWrapper";
 import { ClientDTO } from "../dtos/ClientDTO";
 import { ClienQueryParametersDTO } from "../dtos/QueryParametersDTO";
@@ -16,9 +17,16 @@ export class ClientRepository implements ICLientRepository{
     }
     
     async createClient(client: ClientDTO): Promise<ResultsWrapper<ClientDTO>> {
-        const clientCreated = await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('${client.name}', '${client.email}', ${client.telephone}, '${client.address}', ${client.cleaningDay});`)
-        if(!clientCreated.rows[0]) return ResultsWrapper.fail(new ErrorBadRequest("Unable to create user"))
-        return ResultsWrapper.ok(client)
+        try {
+            const clientCreated = await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('${client.name}', '${client.email}', ${client.telephone}, '${client.address}', ${client.cleaningDay});`)
+            // const clientCreated = await pool.query(`insert into client (name, email, telephone, address, cleaning_day) values('fer', 'fer', 777, 'err', 1);`)
+            if(!clientCreated.rows[0]) return ResultsWrapper.fail(new ErrorBadRequest("Unable to create user"))
+            return ResultsWrapper.ok(client)
+        } catch (error) {
+            console.log(error)
+            return ResultsWrapper.fail(new ErrorUnknown("unknown error when accessing BD"))
+        }
+
     }
 
     private makeSelectClient(queryParameters: ClienQueryParametersDTO){
