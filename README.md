@@ -4,6 +4,17 @@
 
 Este sistema é um dos projetos que fazem parte do meu portfólio. Esse é um site para compra de pacotes de turismo, através dele o cliente pode consultar os pacotes abertos e realizar o orçamento ou compra dos mesmos. Além disso ele pode realizar a contratação de um serviço de viagem personalizada. O cliente pode também criar uma conta no sistema e ter acesso a um sistema de pontuação para troca por viagem.
 
+## ✔️ Técnicas e tecnologias utilizadas
+
+- ``Typescript``
+- ``Postegresql``
+- ``Redis``
+- ``Rest``
+- ``Padrão controller-service-repository``
+- ``Tratamento de error``
+- ``ReactJS``
+
+
 # :hammer:  Funcionalidades do projeto
     * Cadastro de pacotes - administradores
     * Compra de pacotes
@@ -15,11 +26,14 @@ Este sistema é um dos projetos que fazem parte do meu portfólio. Esse é um si
 
 
 ### API
-- [] Configuração de ambiente de desenvolvimento
-2. Implementar chamadas básicas ao banco
-3. Implementar classes Úteis - dtos, tratamento de erros, fabricas de objetos e etc
-4. implementar Validação de sessão com redis
-5. Implementar endPoints usando TDD
+- [ ] Configuração de ambiente de desenvolvimento
+- [ ] Implementar chamadas básicas ao banco
+- [ ] Implementar classes Úteis - dtos, tratamento de erros, fabricas de objetos e etc
+- [ ] implementar Validação de sessão com redis
+- [ ] Implementar endPoints usando TDD
 
 ### Front
-    
+
+# 📁 Acesso ao projeto
+
+# 📁 Acesso ao projeto
