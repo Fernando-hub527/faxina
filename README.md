@@ -34,6 +34,6 @@ Este sistema é um dos projetos que fazem parte do meu portfólio. Esse é um si
 
 ### Front
 
-# 📁 Acesso ao projeto
+# 📁 Acesse o projeto online
 
-# 📁 Acesso ao projeto
+# 📁 Rode o projeto no seu computador
