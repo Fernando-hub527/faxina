@@ -1,5 +1,4 @@
 import { SessionUserDTO } from "../../src/modules/user/dto/SessionUserDTO"
-import session from 'express-session';
 
 
 

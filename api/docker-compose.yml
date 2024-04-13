@@ -6,9 +6,11 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: "faxina"
-      POSTGRES_PASSWORD: "faxina123"
-      POSTGRES_DB: "faxina"
+      POSTGRES_USER: "turismo"
+      POSTGRES_PASSWORD: "turismo123"
+      POSTGRES_DB: "turismo"
+    volumes:
+      - ./setup-server.sql:/docker-entrypoint-initdb.d/setup.sql
   redis:
     image: "redis"
     ports:

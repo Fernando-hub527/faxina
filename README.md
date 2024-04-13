@@ -26,7 +26,7 @@ Este sistema é um dos projetos que fazem parte do meu portfólio. Esse é um si
 
 
 ### API
-- [ ] Configuração de ambiente de desenvolvimento
+- [x] Configuração de ambiente de desenvolvimento
 - [ ] Implementar chamadas básicas ao banco
 - [ ] Implementar classes Úteis - dtos, tratamento de erros, fabricas de objetos e etc
 - [ ] implementar Validação de sessão com redis

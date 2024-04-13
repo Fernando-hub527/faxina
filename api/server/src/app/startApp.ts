@@ -1,7 +1,6 @@
 import express, { json } from "express"
 import cors from "cors"
 import { setRouts } from "./routs"
-import { createTables } from "../../script/startDatabase"
 import RedisStore from "connect-redis"
 import {createClient} from "redis"
 import session from "express-session"
@@ -22,7 +21,6 @@ export class StartApp{
     }
   
     async startTeste () {
-      await createTables(true)
       const store = await this.setSessionControl()
       this.setMiddleares(store)
       return this.app
